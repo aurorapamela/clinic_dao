@@ -1,8 +1,10 @@
 package com.dh.C23.service;
 
-import com.dh.C23.dao.IDao;
-import com.dh.C23.dao.PacienteDAOH2;
+import com.dh.C23.repository.IDao;
+import com.dh.C23.repository.PacienteDAOH2;
 import com.dh.C23.dominio.Paciente;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,39 +12,36 @@ import java.util.List;
 @Service
 public class PacienteServiceImpl implements IPacienteService{
 
+    @Autowired
+    private IDao<Paciente> pacienteIDao;
+
     @Override
     public List<Paciente> listarPacientes() {
-        IDao<Paciente> pacienteIDao = new PacienteDAOH2();
         return pacienteIDao.listarElementos();
     }
 
     @Override
     public Paciente buscarXEmail(String email) {
-        IDao<Paciente> pacienteIDao = new PacienteDAOH2();
         return pacienteIDao.buscarXCriterio(email);
     }
 
     @Override
     public Paciente guardarPaciente(Paciente paciente) {
-        IDao<Paciente> pacienteIDao = new PacienteDAOH2();
         return pacienteIDao.guardar(paciente);
     }
 
     @Override
     public Paciente actualizarPaciente(Paciente paciente) {
-        IDao<Paciente> pacienteIDao = new PacienteDAOH2();
         return pacienteIDao.actualizar(paciente);
     }
 
     @Override
     public Paciente buscarXId(int id) {
-        IDao<Paciente> pacienteIDao = new PacienteDAOH2();
         return pacienteIDao.buscarXId(id);
     }
 
     @Override
     public void eliminarPaciente(int id) {
-        IDao<Paciente> pacienteIDao = new PacienteDAOH2();
         pacienteIDao.eliminar(id);
     }
 }

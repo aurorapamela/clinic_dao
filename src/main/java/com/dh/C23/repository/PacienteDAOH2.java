@@ -1,11 +1,13 @@
-package com.dh.C23.dao;
+package com.dh.C23.repository;
 
 import com.dh.C23.dominio.Paciente;
+import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class PacienteDAOH2 implements IDao<Paciente>{
     @Override
     public List<Paciente> listarElementos() {

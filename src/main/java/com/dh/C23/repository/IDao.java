@@ -1,4 +1,4 @@
-package com.dh.C23.dao;
+package com.dh.C23.repository;
 
 import java.util.List;
 

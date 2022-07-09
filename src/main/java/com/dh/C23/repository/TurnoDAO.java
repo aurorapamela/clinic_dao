@@ -1,4 +1,4 @@
-package com.dh.C23.dao;
+package com.dh.C23.repository;
 
 import com.dh.C23.dominio.Turno;
 import org.springframework.stereotype.Repository;

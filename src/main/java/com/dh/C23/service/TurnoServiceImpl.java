@@ -1,6 +1,6 @@
 package com.dh.C23.service;
 
-import com.dh.C23.dao.IDao;
+import com.dh.C23.repository.IDao;
 import com.dh.C23.dominio.Turno;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

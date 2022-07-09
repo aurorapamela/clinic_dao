@@ -1,11 +1,12 @@
-package com.dh.C23.dao;
+package com.dh.C23.repository;
 
 import com.dh.C23.dominio.Domicilio;
-import com.dh.C23.dominio.Paciente;
+import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.List;
 
+@Repository
 public class DomicilioDAOH2 implements IDao<Domicilio>{
 
     @Override

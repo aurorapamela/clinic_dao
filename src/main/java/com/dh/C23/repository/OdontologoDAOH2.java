@@ -1,8 +1,7 @@
-package com.dh.C23.dao;
+package com.dh.C23.repository;
 
 import com.dh.C23.dominio.Odontologo;
-import com.dh.C23.dominio.Paciente;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,7 +10,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
+@Repository
 public class OdontologoDAOH2 implements IDao<Odontologo> {
     @Override
     public List<Odontologo> listarElementos() {
@@ -75,7 +74,7 @@ public class OdontologoDAOH2 implements IDao<Odontologo> {
             connection = H2Aux.getConnection();
             PreparedStatement ps = connection.prepareStatement("DELETE FROM ODONTOLOGOS WHERE ID = ?");
             ps.setInt(1, id);
-            ps.executeQuery();
+            ps.execute();
         } catch (Exception e){
             e.printStackTrace();
         } finally {
