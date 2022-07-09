@@ -91,13 +91,30 @@ public class PacienteDAOH2 implements IDao<Paciente>{
 
     @Override
     public void eliminar(int id) {
+        Connection connection = null;
+        try {
+            Paciente pacienteAEliminar = buscarXId(id);
+            connection = H2Aux.getConnection();
+            DomicilioDAOH2 domicilioDAOH2 = new DomicilioDAOH2();
+            domicilioDAOH2.eliminar(pacienteAEliminar.getDomicilio().getId());
+            PreparedStatement ps = connection.prepareStatement("DELETE FROM PACIENTES WHERE ID = ?");
 
+            ps.setInt(1, id);
+            ps.executeQuery();
+        } catch (Exception e){
+            e.printStackTrace();
+        } finally {
+            try {
+                connection.close();
+            } catch (Exception ex){
+                ex.printStackTrace();
+            }
+        }
     }
 
     @Override
     public Paciente guardar(Paciente paciente) {
         Connection connection = null;
-//        Paciente paciente = null;
         try {
             connection = H2Aux.getConnection();
             DomicilioDAOH2 domicilioDAOH2 = new DomicilioDAOH2();
@@ -130,6 +147,30 @@ public class PacienteDAOH2 implements IDao<Paciente>{
 
     @Override
     public Paciente actualizar(Paciente paciente) {
-        return null;
+        Connection connection = null;
+        try {
+            connection = H2Aux.getConnection();
+            DomicilioDAOH2 domicilioDAOH2 = new DomicilioDAOH2();
+            domicilioDAOH2.actualizar(paciente.getDomicilio());
+            PreparedStatement ps = connection.prepareStatement("UPDATE PACIENTES " +
+                    "SET APELLIDO=?, NOMBRE=?, EMAIL=?, DNI=?, FECHA_INGRESO=?, DOMICILIO_ID = ? WHERE ID=?");
+            ps.setString(1, paciente.getApellido());
+            ps.setString(2, paciente.getNombre());
+            ps.setString(3, paciente.getEmail());
+            ps.setInt(4, paciente.getDni());
+            ps.setDate(5, Date.valueOf(paciente.getFecha_ingreso()));
+            ps.setInt(6, paciente.getDomicilio().getId());
+            ps.setInt(7, paciente.getId());
+            ps.execute();
+        } catch (Exception e){
+            e.printStackTrace();
+        } finally {
+            try {
+                connection.close();
+            } catch (Exception ex){
+                ex.printStackTrace();
+            }
+        }
+        return paciente;
     }
 }

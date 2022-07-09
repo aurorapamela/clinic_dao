@@ -10,5 +10,5 @@ public interface IPacienteService {
     Paciente guardarPaciente(Paciente paciente);
     Paciente actualizarPaciente(Paciente paciente);
     Paciente buscarXId(int id);
-
+    void eliminarPaciente(int id);
 }

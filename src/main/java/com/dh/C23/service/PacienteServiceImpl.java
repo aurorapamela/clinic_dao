@@ -30,12 +30,19 @@ public class PacienteServiceImpl implements IPacienteService{
 
     @Override
     public Paciente actualizarPaciente(Paciente paciente) {
-        return null;
+        IDao<Paciente> pacienteIDao = new PacienteDAOH2();
+        return pacienteIDao.actualizar(paciente);
     }
 
     @Override
     public Paciente buscarXId(int id) {
         IDao<Paciente> pacienteIDao = new PacienteDAOH2();
         return pacienteIDao.buscarXId(id);
+    }
+
+    @Override
+    public void eliminarPaciente(int id) {
+        IDao<Paciente> pacienteIDao = new PacienteDAOH2();
+        pacienteIDao.eliminar(id);
     }
 }

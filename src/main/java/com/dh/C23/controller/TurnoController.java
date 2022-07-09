@@ -36,4 +36,35 @@ public class TurnoController {
     public ResponseEntity<List<Turno>> traerTurnos(){
         return ResponseEntity.ok(turnosService.listarTurnos());
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Turno> buscarTurno(@PathVariable int id){
+        Turno turnoBuscado = turnosService.buscarTurnoXId(id);
+        if(turnoBuscado != null){
+            return ResponseEntity.ok(turnoBuscado);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
+
+    @PutMapping
+    public ResponseEntity<Turno> actualizarTurno(@RequestBody Turno turno){
+        Turno turnoBuscado = turnosService.buscarTurnoXId(turno.getId());
+        if(turnoBuscado != null){
+            return ResponseEntity.ok(turnosService.actualizarTurno(turno));
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> eliminarTurno(@PathVariable int id){
+        Turno turnoBuscado = turnosService.buscarTurnoXId(id);
+        if(turnoBuscado != null){
+            turnosService.eliminarTurno(id);
+            return ResponseEntity.ok("Se eliminó al turno con id = " + id);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se pudo eliminar al turno con id = " + id + "al no ser encontrado en la base de datos");
+        }
+    }
 }

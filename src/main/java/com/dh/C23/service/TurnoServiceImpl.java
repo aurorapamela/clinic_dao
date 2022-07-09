@@ -28,16 +28,16 @@ public class TurnoServiceImpl implements ITurnoService{
 
     @Override
     public Turno actualizarTurno(Turno turno) {
-        return null;
+        return turnoIDao.actualizar(turno);
     }
 
     @Override
     public void eliminarTurno(int id) {
-
+        turnoIDao.eliminar(id);
     }
 
     @Override
     public Turno buscarTurnoXId(int id) {
-        return null;
+        return turnoIDao.buscarXId(id);
     }
 }
